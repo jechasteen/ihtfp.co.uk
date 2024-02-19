@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dairy Order Guide</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Barcode+EAN13+Text&display=swap" rel="stylesheet">
+    <style>
+html,body {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 100;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    max-width: 100vw;
+}
+
+h1 {
+    margin-top: 0;
+}
+
+h2 {
+    margin: 1em auto 0 auto;
+    font-weight: 400;
+}
+
+#main {
+    min-height: 100vh;
+}
+
+#input {
+    padding: 10px;
+    width: 95%;
+    min-height: 75vh;
+}
+
+.priority-heading {
+    margin-top: 2em;
+}
+
+.priority-data {
+    border-bottom: 1px solid Gray;
+}
+
+.priority-data > span {
+    padding-right: 2em;
+}
+
+.priority-item {
+    display: flex;
+    margin-left: 1em;
+    min-height: 4em;
+}
+
+.priority-item > span {
+    padding: 1.25em;
+    padding-bottom: 0;
+}
+
+.item-upc {
+    padding: 0 !important;
+    font-family: "Libre Barcode EAN13 Text", system-ui;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 96px;
+    transform: scale(1, 0.5);
+    height: 50px;
+}
+
+.item-name {
+    min-width: 50%;
+}
+
+.item-esi-container {
+    text-align: right;
+}</style>
+</head>
+<body>
+    <div id="main" class="main">
+        <h1>Order Guide Generator</h1>
+        <p>Paste CSV below.</p>
+        <textarea id="input" cols="80" rows="20"></textarea>
+    </div>
+    <script>
+const DIV = (cls, inner) => `<div class="${cls}">${inner}</div>`
+const upc = (upc) => DIV("upc", upc)
+const desc = (name, size) => DIV("desc", `${name} - ${size}`)
+const esi_item = (date, n) => DIV("esi-item", `${date.toDateString().slice(0, -4)} ${n}cs`)
+const esi_group = (items) => DIV("esi-group", `${items.forEach((v) => `${v}`)}`)
+const row = (u, name, esi) => DIV("row", `${u}${name}${esi}`)
+
+const data = {}
+
+function toTitleCase(str) {
+    return str.replace(
+        /\w\S*/g,
+        function(txt) {
+        return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+        }
+    );
+}
+
+window.onload = function() {
+    console.log(".")
+    document.getElementById("input").oninput = (e) => {
+        if (!e.target.value) return;
+        csv_to_obj(e.target.value);
+        obj_to_dom();
+    }
+}
+
+function obj_to_dom() {
+    function createElement(tagName, className) {
+        const el = document.createElement(tagName);
+        el.classList.add(className);
+        return el;
+    }
+
+    const main = document.getElementById("main");
+    main.innerHTML = "";
+
+    console.log(data);
+
+    const h1_plan_heading = main.appendChild(createElement("h1", "heading"));
+    const pw = data.period_week.split(" ");
+    h1_plan_heading.innerText =
+        `Order Guide P${pw[2]}W${pw[4]} ${pw[0]}`;
+    
+    for (let prio in data.priorities) {
+        if (!data.priorities.hasOwnProperty(prio)) continue;
+
+        const cur_prio = data.priorities[prio];
+        
+        const h2_description = main.appendChild(createElement("h2", "priority-heading"));
+        h2_description.innerText = toTitleCase(cur_prio.description);
+
+        const prio_div = main.appendChild(document.createElement("div"));
+        prio_div.classList.add("priority-data");
+
+        prio_div.appendChild(document.createElement("span"))
+            .innerText = `${cur_prio.retail}`;
+        prio_div.appendChild(document.createElement("span"))
+            .innerText = cur_prio.size;
+        prio_div.appendChild(document.createElement("span"))
+            .innerText = `${cur_prio.start} through ${cur_prio.thru}`;
+
+        for (let upc in cur_prio.items) {
+            const cur_item = cur_prio.items[upc];
+
+            const div_item = createElement("div", "priority-item");
+
+            const span_upc = createElement("span", "item-upc");
+            span_upc.innerText = `${upc.slice(2)}?`;
+            div_item.appendChild(span_upc);
+
+            const span_name = createElement("span", "item-name");
+            span_name.innerText = `${cur_item.name} - ${cur_item.size}`;
+            div_item.appendChild(span_name);
+
+            if (cur_item.esi) {
+                if (cur_item.esi.length === 0) continue;
+                const span_esi = createElement("span", "item-esi-container");
+                for (let i in cur_item.esi) {
+                    const div_esi_item = document.createElement("div");
+                    const date = new Date(Date.parse(cur_item.esi[i].date))
+                    div_esi_item.innerHTML =
+                        `${date.toDateString().slice(0, -4)} ${cur_item.esi[i].qty}cs`;
+                    span_esi.appendChild(div_esi_item);
+                }
+                div_item.appendChild(span_esi);
+            }
+            main.appendChild(div_item);
+        }
+    }
+}
+
+function csv_to_obj(csv) {
+    let lines = csv.split("\n").map(a => a.split(","));
+    data.period_week = lines[1][0];
+    data.priorities = {};
+
+    let cur_prio = 0;
+
+    for (let i = 5; i < lines.length; i++) {
+        const ln = lines[i];
+        const esi = {
+            date: ln[14],
+            qty: ln[12],
+            size: ln[13]
+        };
+
+        if (ln[2] === "main" || ln[2] === "Tie-In") {
+            data.priorities[++cur_prio] = {
+                n: cur_prio,
+                type: ln[2],
+                description: ln[5],
+                size: ln[6],
+                retail: ln[7],
+                evt_part: ln[8],
+                thru: ln[9],
+                start: ln[10],
+                end: ln[11],
+                items: {}
+            }
+        } 
+        else {
+            if (!ln[3]) continue;
+            if (!data.priorities[cur_prio].items[ln[3]]) {
+                data.priorities[cur_prio].items[ln[3]] = {
+                    name: ln[5],
+                    upc: ln[3],
+                    size: ln[6]
+                }
+            }
+            if (ln[13] !== "") {
+                if (data.priorities[cur_prio].items[ln[3]].esi) {
+                    data.priorities[cur_prio].items[ln[3]].esi.push(esi);
+                }
+                else {
+                    data.priorities[cur_prio].items[ln[3]].esi = [esi];
+                }
+            }
+        }
+    }
+    
+    // console.log(data);
+}</script>
+</body>
+</html>
