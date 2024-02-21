@@ -11,7 +11,8 @@ function toTitleCase(str) {
     return str.replace(
         /\w\S*/g,
         function(txt) {
-        return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+            if (txt === "WDD") return txt;
+            else return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
         }
     );
 }
@@ -41,14 +42,18 @@ function obj_to_dom() {
     const pw = data.period_week.split(" ");
     h1_plan_heading.innerText =
         `Order Guide P${pw[2]}W${pw[4]} ${pw[0]}`;
+    let n_prio = 0;
     
     for (let prio in data.priorities) {
         if (!data.priorities.hasOwnProperty(prio)) continue;
-
+        
         const cur_prio = data.priorities[prio];
+        if (cur_prio.n !== "") {
+            ++n_prio;
+        }
         
         const h2_description = main.appendChild(createElement("h2", "priority-heading"));
-        h2_description.innerText = toTitleCase(cur_prio.description);
+        h2_description.innerText = toTitleCase(`${cur_prio.description}`);
 
         const prio_div = main.appendChild(document.createElement("div"));
         prio_div.classList.add("priority-data");
@@ -96,6 +101,7 @@ function csv_to_obj(csv) {
     data.priorities = {};
 
     let cur_prio = 0;
+    let n_prio = 0;
 
     for (let i = 5; i < lines.length; i++) {
         const ln = lines[i];
@@ -105,7 +111,7 @@ function csv_to_obj(csv) {
             size: ln[13]
         };
 
-        if (ln[2] === "main" || ln[2] === "Tie-In") {
+        if (ln[9].length > 0) {
             data.priorities[++cur_prio] = {
                 n: cur_prio,
                 type: ln[2],
@@ -118,7 +124,7 @@ function csv_to_obj(csv) {
                 end: ln[11],
                 items: {}
             }
-        } 
+        }
         else {
             if (!ln[3]) continue;
             if (!data.priorities[cur_prio].items[ln[3]]) {

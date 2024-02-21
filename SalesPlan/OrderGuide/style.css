@@ -1,6 +1,6 @@
 
 html,body {
-    font-family: 'Poppins', sans-serif;
+    font-family: sans-serif;
     font-weight: 100;
     margin: 0;
     padding: 0;
@@ -41,7 +41,8 @@ h2 {
 
 .priority-item {
     display: flex;
-    margin-left: 1em;
+    margin-left: 3em;
+    margin-bottom: 0.5em;
     min-height: 4em;
 }
 
@@ -56,7 +57,7 @@ h2 {
     font-weight: 400;
     font-style: normal;
     font-size: 96px;
-    transform: scale(1, 0.5);
+    transform: scale(1, 0.6);
     height: 50px;
 }
 
