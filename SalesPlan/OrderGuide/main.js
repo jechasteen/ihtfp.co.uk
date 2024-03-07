@@ -65,17 +65,19 @@ function obj_to_dom() {
         prio_div.appendChild(document.createElement("span"))
             .innerText = `${cur_prio.start} through ${cur_prio.thru}`;
 
+        const prio_container = main.appendChild(createElement("div", "priority-container"));
+
         for (let upc in cur_prio.items) {
             const cur_item = cur_prio.items[upc];
 
-            const div_item = createElement("div", "priority-item");
+            const div_item = createElement("span", "priority-item");
 
             const span_upc = createElement("span", "item-upc");
             span_upc.innerText = `${upc.slice(2)}?`;
             div_item.appendChild(span_upc);
 
             const span_name = createElement("span", "item-name");
-            span_name.innerText = `${cur_item.name} - ${cur_item.size}`;
+            span_name.innerText = toTitleCase(cur_item.name);
             div_item.appendChild(span_name);
 
             if (cur_item.esi) {
@@ -90,8 +92,9 @@ function obj_to_dom() {
                 }
                 div_item.appendChild(span_esi);
             }
-            main.appendChild(div_item);
+            prio_container.appendChild(div_item);
         }
+        main.appendChild(prio_container)
     }
 }
 
@@ -111,7 +114,7 @@ function csv_to_obj(csv) {
             size: ln[13]
         };
 
-        if (ln[9].length > 0) {
+        if (ln[9] && ln[9].length > 0) {
             data.priorities[++cur_prio] = {
                 n: cur_prio,
                 type: ln[2],
