@@ -41,8 +41,11 @@ I consider this to be in a 1.0 state. It's not perfect, but it does the job as w
 - Break out the period and week for the start and end of display, then show that status
 
 > e.g. data says P3W2 - P3W3 it could say something like "First week of two"
+>
 > e.g. data says P1W2 - P3W4, and it's currently P2W2, it could say "Week 5 of 10"
 
 - Craft tests to ensure that changes work without having to manually verify
 
 > There are sample CSV files inside `tests/`
+
+- Take out the middle man and get the data directly from the XLSX file. This would be awesome because then you could just put a freshly-built `OrderGuide.html` on your work onedrive and use the application there.
