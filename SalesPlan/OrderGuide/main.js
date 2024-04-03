@@ -1,30 +1,14 @@
-const DIV = (cls, inner) => `<div class="${cls}">${inner}</div>`
-const upc = (upc) => DIV("upc", upc)
-const desc = (name, size) => DIV("desc", `${name} - ${size}`)
-const esi_item = (date, n) => DIV("esi-item", `${date.toDateString().slice(0, -4)} ${n}cs`)
-const esi_group = (items) => DIV("esi-group", `${items.forEach((v) => `${v}`)}`)
-const row = (u, name, esi) => DIV("row", `${u}${name}${esi}`)
+// Main data structure. Logged upon parsing the CSV
+const data = {};
 
-const data = {}
-
-function toTitleCase(str) {
-    return str.replace(
-        /\w\S*/g,
-        function(txt) {
-            if (txt === "WDD") return txt;
-            else return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
-        }
-    );
-}
-
-window.onload = function() {
-    console.log(".")
+window.onload = function () {
+    console.log("."); // Are we all hooked up?
     document.getElementById("input").oninput = (e) => {
         if (!e.target.value) return;
         csv_to_obj(e.target.value);
         obj_to_dom();
-    }
-}
+    };
+};
 
 function obj_to_dom() {
     function createElement(tagName, className) {
@@ -40,32 +24,54 @@ function obj_to_dom() {
 
     const h1_plan_heading = main.appendChild(createElement("h1", "heading"));
     const pw = data.period_week.split(" ");
-    h1_plan_heading.innerText =
-        `Order Guide P${pw[2]}W${pw[4]} ${pw[0]}`;
-    let n_prio = 0;
-    
-    for (let prio in data.priorities) {
-        if (!data.priorities.hasOwnProperty(prio)) continue;
-        
-        const cur_prio = data.priorities[prio];
-        if (cur_prio.n !== "") {
-            ++n_prio;
+    h1_plan_heading.innerText = `Order Guide P${pw[2]}W${pw[4]} ${pw[0]}`;
+
+    const h2_date = main.appendChild(createElement("h2", "date"));
+    h2_date.innerText = data.dates;
+
+    let prio_number = 0;
+
+    for (let i in data.priorities) {
+        if (!data.priorities.hasOwnProperty(i)) continue;
+
+        const cur_prio = data.priorities[i];
+
+        let prio_text;
+        if (cur_prio.type.toUpperCase() === "MAIN") {
+            prio_text = `${++prio_number}. `;
+        } else if (cur_prio.type === "Tie-In") {
+            prio_text = `${prio_number}T. `;
+        } else {
+            prio_text = "";
         }
-        
-        const h2_description = main.appendChild(createElement("h2", "priority-heading"));
-        h2_description.innerText = toTitleCase(`${cur_prio.description}`);
+    
+        // Section Heading
+        const h2_description = main.appendChild(
+            createElement("h2", "priority-heading")
+        );
+        h2_description.innerText = toTitleCase(
+            `${prio_text} ${cur_prio.description}`
+        );
 
         const prio_div = main.appendChild(document.createElement("div"));
         prio_div.classList.add("priority-data");
+        prio_div.appendChild(
+            document.createElement("span")
+        ).innerText = `${cur_prio.evt_part}`;
+        prio_div.appendChild(
+            document.createElement("span")
+        ).innerText = `${cur_prio.retail}`;
+        prio_div.appendChild(document.createElement("span")).innerText =
+            cur_prio.size;
+        prio_div.appendChild(
+            document.createElement("span")
+        ).innerText = `${cur_prio.start} through ${cur_prio.thru}`;
 
-        prio_div.appendChild(document.createElement("span"))
-            .innerText = `${cur_prio.retail}`;
-        prio_div.appendChild(document.createElement("span"))
-            .innerText = cur_prio.size;
-        prio_div.appendChild(document.createElement("span"))
-            .innerText = `${cur_prio.start} through ${cur_prio.thru}`;
 
-        const prio_container = main.appendChild(createElement("div", "priority-container"));
+        // Member Items
+        const prio_container = main.appendChild(
+            createElement("div", "priority-container")
+        );
 
         for (let upc in cur_prio.items) {
             const cur_item = cur_prio.items[upc];
@@ -83,24 +89,31 @@ function obj_to_dom() {
             if (cur_item.esi) {
                 if (cur_item.esi.length === 0) continue;
                 const span_esi = createElement("span", "item-esi-container");
+
+                // Begin ESI Data
                 for (let i in cur_item.esi) {
                     const div_esi_item = document.createElement("div");
-                    const date = new Date(Date.parse(cur_item.esi[i].date))
-                    div_esi_item.innerHTML =
-                        `${date.toDateString().slice(0, -4)} ${cur_item.esi[i].qty}cs`;
+                    const date = new Date(Date.parse(cur_item.esi[i].date));
+                    div_esi_item.innerHTML = `${date
+                        .toDateString()
+                        .slice(0, -4)} ${cur_item.esi[i].qty}cs`;
                     span_esi.appendChild(div_esi_item);
                 }
                 div_item.appendChild(span_esi);
             }
             prio_container.appendChild(div_item);
         }
-        main.appendChild(prio_container)
+        main.appendChild(prio_container);
     }
 }
 
 function csv_to_obj(csv) {
-    let lines = csv.split("\n").map(a => a.split(","));
+    let lines = csv.split("\n").map((a) => a.split(","));
     data.period_week = lines[1][0];
+    data.dates = lines[2]
+        .slice(0, lines[2].length - 15)
+        .join(",")
+        .replace(/"/g, "");
     data.priorities = {};
 
     let cur_prio = 0;
@@ -111,10 +124,11 @@ function csv_to_obj(csv) {
         const esi = {
             date: ln[14],
             qty: ln[12],
-            size: ln[13]
+            size: ln[13],
         };
 
         if (ln[9] && ln[9].length > 0) {
+            // Is Main display item
             data.priorities[++cur_prio] = {
                 n: cur_prio,
                 type: ln[2],
@@ -125,28 +139,39 @@ function csv_to_obj(csv) {
                 thru: ln[9],
                 start: ln[10],
                 end: ln[11],
-                items: {}
-            }
+                items: {},
+            };
         }
-        else {
-            if (!ln[3]) continue;
+        else { // is Tie-In or the next group
+            if (!ln[3]) continue;   // UPC missing?
             if (!data.priorities[cur_prio].items[ln[3]]) {
                 data.priorities[cur_prio].items[ln[3]] = {
                     name: ln[5],
                     upc: ln[3],
-                    size: ln[6]
-                }
+                    size: ln[6],
+                };
             }
             if (ln[13] !== "") {
                 if (data.priorities[cur_prio].items[ln[3]].esi) {
                     data.priorities[cur_prio].items[ln[3]].esi.push(esi);
-                }
-                else {
+                } else {
                     data.priorities[cur_prio].items[ln[3]].esi = [esi];
                 }
             }
         }
     }
-    
-    // console.log(data);
+}
+
+// This could be used as a node module to parse the CSV and work with the resulting object
+if (typeof window === "undefined") {
+    module.exports = csv_to_obj;
+}
+
+// The text in the spreadsheet is inconsistently capitalized. This a borrowed
+// routine (stack overflow?) that "fixes" it. It could be improved.
+function toTitleCase(str) {
+    return str.replace(/\w\S*/g, function (txt) {
+        if (txt === "WDD") return txt;
+        else return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+    });
 }
