@@ -6,4 +6,6 @@ This is mostly an experiment to see if the VPN at work will block github pages. 
 
 ## Links
 
-[Sales Plan -> Order Guide](SalesPlan/OrderGuide/OrderGuide.html)
+[Sales Plan -> Order Guide](SalesPlan/OrderGuide/OrderGuide.html) [(readme)](SalesPlan/OrderGuide/README.md)
+
+[General Purpose -> BC Listulator](bclistulator/app.html)
