@@ -3,11 +3,21 @@ const data = {};
 
 window.onload = function () {
     console.log("."); // Are we all hooked up?
-    document.getElementById("input").oninput = (e) => {
-        if (!e.target.value) return;
-        csv_to_obj(e.target.value);
-        obj_to_dom();
-    };
+    document.getElementById("xlsx").addEventListener("change", (e) => {
+        console.log(e);
+        const file = e.target.files[0];
+        // check file type
+
+        const reader = new FileReader();
+        reader.addEventListener('load', async (ev) => {
+            // do something with ev.target.result
+            const rows = await xlsx2csv(ev.target.result, null, { sheet: { max: 100, collect: true } })
+            console.log(rows);
+            csv_to_obj(rows);
+            obj_to_dom();
+        });
+        reader.readAsArrayBuffer(file);
+    }, false);
 };
 
 function obj_to_dom() {
@@ -44,7 +54,7 @@ function obj_to_dom() {
         } else {
             prio_text = "";
         }
-    
+
         // Section Heading
         const h2_description = main.appendChild(
             createElement("h2", "priority-heading")
@@ -66,7 +76,6 @@ function obj_to_dom() {
         prio_div.appendChild(
             document.createElement("span")
         ).innerText = `${cur_prio.start} through ${cur_prio.thru}`;
-
 
         // Member Items
         const prio_container = main.appendChild(
@@ -107,8 +116,8 @@ function obj_to_dom() {
     }
 }
 
-function csv_to_obj(csv) {
-    let lines = csv.split("\n").map((a) => a.split(","));
+function csv_to_obj(lines) {
+    //let lines = csv.split("\n").map((a) => a.split(","));
     data.period_week = lines[1][0];
     data.dates = lines[2]
         .slice(0, lines[2].length - 15)
@@ -141,9 +150,9 @@ function csv_to_obj(csv) {
                 end: ln[11],
                 items: {},
             };
-        }
-        else { // is Tie-In or the next group
-            if (!ln[3]) continue;   // UPC missing?
+        } else {
+            // is Tie-In or the next group
+            if (!ln[3]) continue; // UPC missing?
             if (!data.priorities[cur_prio].items[ln[3]]) {
                 data.priorities[cur_prio].items[ln[3]] = {
                     name: ln[5],

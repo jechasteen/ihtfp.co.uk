@@ -7,9 +7,8 @@ Takes the sales plan the company gives you and converts it into a printable, sca
 ## How it works
 
 1. Download the XLSX sales plan spreadsheet from Next, filtered to only the Dairy Bunker section.
-2. Convert or save the file to comma-delineated CSV
 3. Navigate to the [Application](OrderGuide.html)
-4. Paste the CSV into the text area
+4. Click "Browse..." and select the downloaded file.
 5. Print to PDF and email to your work address
 
 ## How it works, but more interesting
@@ -28,7 +27,7 @@ Simple formatting, just enough to make it so that it prints on as few pages as p
 
 #### Dependencies
 
-There are none, really. Nodemon is a dev dep. I've used it while fiddling with things so I don't have to keep running to the terminal to run `node build.js` again.
+In order to parse the XLSX file (which I understand is binary), we use a library called xlsx2csv which actually outputs an array of arrays. Ideally this library should be injected into the app HTML during the build step, but is now brought in via CDN.
 
 Should I consider fonts a dependency? IDK, but there are a couple in the CSS.
 
@@ -48,4 +47,4 @@ I consider this to be in a 1.0 state. It's not perfect, but it does the job as w
 
 > There are sample CSV files inside `tests/`
 
-- Take out the middle man and get the data directly from the XLSX file. This would be awesome because then you could just put a freshly-built `OrderGuide.html` on your work onedrive and use the application there.
+- ~~Take out the middle man and get the data directly from the XLSX file. This would be awesome because then you could just put a freshly-built `OrderGuide.html` on your work onedrive and use the application there.~~
