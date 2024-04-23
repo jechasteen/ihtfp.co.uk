@@ -1,5 +1,9 @@
 {
     "cSpell.words": [
         "prio"
-    ]
+    ],
+    "cSpell.enableFiletypes": [
+        "!javascript"
+    ],
+    "cSpell.checkOnlyEnabledFileTypes": true
 }

@@ -13,7 +13,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.18.3",
     "jquery": "^3.7.1",
     "quagga": "^0.12.1"
   },
