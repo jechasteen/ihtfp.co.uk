@@ -1,0 +1,88 @@
+/* CSS Reset */
+
+html {
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: inherit;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ol,
+ul {
+    margin: 0;
+    padding: 0;
+    font-weight: normal;
+}
+
+ol,
+ul {
+    list-style: none;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* End CSS Reset */
+
+/* This gets rid of the header and footer, really */
+@page {
+    margin: 0;
+}
+
+body {
+    margin: 0.25in;
+}
+
+h1, h2, h4 {
+    width: 100%;
+    text-align: center;
+}
+
+h2 {
+    margin-top: 2em;
+    border-bottom: 1px solid gray;
+}
+
+h4 {
+    margin-top: 2em;
+}
+
+.barcode {
+    display: inline-block;
+    padding: 0 !important;
+    font-family: "Libre Barcode EAN13 Text", system-ui;
+    font-style: normal;
+    font-size: 100px;
+    transform: scaleY(0.5);
+    -webkit-transform: scaleY(0.5);
+    -moz-transform: scaleY(0.5);
+}
+
+.flex {
+    text-align: center;
+    display: grid;
+    grid-auto-flow: row;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    margin-bottom: 1em;
+}
+
+body {
+    font-family: "owners-text", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    padding: 1em 0 1em 2em;
+}

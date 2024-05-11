@@ -1,6 +1,10 @@
 ## Dairy
 
-[Sales Plan -> Order Guide](Dairy/SalesPlan/OrderGuide/OrderGuide.html) [(readme)](Dairy/SalesPlan/OrderGuide/README.md)
+[Order Guide](Dairy/SalesPlan/OrderGuide/OrderGuide.html) [(readme)](Dairy/SalesPlan/OrderGuide/README.md)
 
-[Sales Plan -> Display Plan](Dairy/SalesPlan/DisplayPlan/DisplayPlan.html)
+[Display Plan](Dairy/SalesPlan/DisplayPlan/DisplayPlan.html) ! WORK IN PROGRESS !
+
+## General Purpose
+
+[Barcode Listulator](GeneralPurpose/BarcodeListulator/BarcodeListulator.html)
 

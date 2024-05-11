@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barcode Listulator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Barcode+EAN13+Text&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Barcode+EAN13+Text&display=swap" rel="stylesheet">
+    <style>%STYLE%</style>
+</head>
+<body>
+    <h1>Barcode Listulator</h1>
+    <hr>
+    <details>
+        <summary>Help</summary>
+        <p>
+            This tool can create printable barcode lists.
+        </p>
+        <p>
+            Use the text field below to insert the data you'd like to present.
+            Gathering the UPCs is relatively easier if you use a mobile app.
+            If you'd like to organize and annotate your barcodes, use the
+            following format. Otherwise, a list of UPCs -- only one on each line
+            -- will result in a list of barcodes only with no additional text.
+        </p>
+        <p>
+            The first line should be either blank or the text you'd
+            like to use for the resulting document. There should be no hash (#)
+            mark on this line. Use a blank line at the start of your data for 
+            no title. 
+        </p>
+        <textarea disabled id="example-code">
+# Section Title
+012345678901, Product Description, Additional Information
+        </textarea>
+        <p>
+            Note: UPCs are 12 digits long. The text box below uses a fixed-width
+            font so that you can tell when one of your UPCs is wrong. If you
+            are copying UPCs from certain Kroger sources, you'll need to fuss with
+            the numbers a bit: only take the last 11 digits. There's a stupid reason
+            for this that I won't bore you with, but if you're interested in learning
+            more, it's called a check digit. Some Kroger codes are missing this digit.
+            Don't worry, the font computes this for us automatically, you just need
+            the last 11.
+        </p>
+    </details>
+    <textarea name="data" id="data" cols="100" rows="32"></textarea><br>
+    <button id="submit">Submit</button>
+    <script>%SCRIPT%</script>
+</body>
+</html>
