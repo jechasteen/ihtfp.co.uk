@@ -2,7 +2,7 @@ const fs = require("fs");
 const path = require("path");
 
 const Template = require("../../lib/template");
-const $ = require("../../lib/runnner");
+const $ = require("../../lib/runner");
 
 const VERSION = process.env.DISPLAYPLAN_VERSION || "3";
 const read_opt = { encoding: "utf-8" };
