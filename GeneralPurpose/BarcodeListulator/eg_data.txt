@@ -33,7 +33,7 @@ Deli Department Catalogs
 03022311091, Queen City Chkn Sld w/ Grp & Pcn
 03022311444, Loaded Potato Salad
 07111700188, Macaroni Salad
-22555510000, Pesto Chicken Salad
+03022311414, Pesto Chicken Salad
 23222200000, Spicy Italian Pasta Salad
 24733780000, Summer Slaw
 
@@ -106,7 +106,6 @@ Deli Department Catalogs
 01111007112, PRSL Choice Corn Beef
 01111007111, PRSL Choice Pastrami
 01111099503, PRSL Choice Roast Beef Well
-01111061976, PS Soppressata
 
 ## Bulk Ham
 01111099024, PRSL Black Forest Ham 2x 8#
@@ -118,7 +117,6 @@ Deli Department Catalogs
 ## Bulk Turkey
 01111099498, PS Mesquite Turkey 2x 8.5#
 01111099496, PS Oven Turkey 2x 9#
-01111060884, PS Oven Turkey 6x 4.33#
 01111099497, PS Honey Turkey 2x 9.65#
 01111061242, PS Blackened Turkey
 01111060734, PS Pepper Turkey
@@ -134,6 +132,7 @@ Deli Department Catalogs
 01111060274, PS Hard Salami
 01111019000, PS Pickle Pepper Loaf
 01111099838, PS Pepperoni
+01111061976, PS Soppressata
 
 ## Hot Sides
 01111037260, KRO CRMY MAC CHEESECAKE
@@ -145,6 +144,7 @@ Deli Department Catalogs
 
 ## Chicken
 07029216392, S M DELI CHKN BRD II
+07701306247, Lemon Pepper
 04172302345, PGPR CUT UP CKN
 07563245811, PGPR CKN TENDER JUMBO
 07563293085, MARINATED CHICKEN DRUMSTICK
@@ -155,7 +155,7 @@ Deli Department Catalogs
 # Catalog 69 (Payton)
 76308996794, CHICKEN BREADING
 40519206794, SAVRY CHCKN SEASONING
-04150001270, CATTLEMENS MEMPHIS BBW
+04150001270, CATTLEMENS MEMPHIS BBQ
 04150001269, FRANKS REDHOT BUFFALO WIN
 01300053060, HEINZ SS MUSTARD
 02100066371, KRFT INDV MRCL WHP DRSSG
