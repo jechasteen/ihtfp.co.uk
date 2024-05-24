@@ -6,9 +6,13 @@ window.onload = () => {
 
     const groups = [];
     
-    document.getElementById("example").addEventListener("click", (ev) => {
-        document.getElementById("data").value = exampleData;
+    document.getElementById("deli").addEventListener("click", (ev) => {
+        document.getElementById("data").value = deli_data;
     });
+
+    document.getElementById("storeSupplies").addEventListener("click", (ev) => {
+        document.getElementById("data").value = storeSupplies_data;
+    })
 
     document.getElementById("submit").addEventListener("click", (ev) => {
         // console.log(document.getElementById("data").value);
@@ -24,9 +28,9 @@ window.onload = () => {
         }
 
         for (let i = 1; i < data.length; i++) {
-            if (data[i] === undefined) continue;
+            if (data[i] === undefined || data[i] === "") continue;
             if (isHeading(data[i])) {
-                if (data[i] === undefined) continue;
+                if (data[i] === undefined || data[i] === "") continue;
 
                 // This is a headline, start a new UPC group
                 let heading;
@@ -45,14 +49,19 @@ window.onload = () => {
                 while (data[++i] && !isHeading(data[i]) && i < data.length) {
                     console.log(data[i]);
                     if (data[i] === undefined) continue;
-                    const [upc, title, desc] = data[i].split(", ");
+                    const [upc, title, desc] = data[i].split(",");
                     if (!upc) continue;
 
                     const div_item = document.createElement("div");
                     div_item.classList.add("flex-item");
 
                     const p_barcode = document.createElement("p");
-                    p_barcode.innerText = upc.length === 12 ? upc : upc + "?";
+                    if (upc.length === 12 || upc.length === 13) {
+                        p_barcode.innerText = upc
+                    }
+                    else if (upc.length === 11) {
+                        p_barcode.innerText = upc + "?"
+                    }
                     p_barcode.classList.add("barcode");
                     div_item.appendChild(p_barcode);
 
@@ -77,4 +86,5 @@ window.onload = () => {
     });
 };
 
-const exampleData = `%EGDATA%`
+const deli_data = `%DELI%`
+const storeSupplies_data = `%STORESUPPLIES%`

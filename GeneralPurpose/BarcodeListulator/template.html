@@ -7,7 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Libre+Barcode+EAN13+Text&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Libre+Barcode+EAN13+Text&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.typekit.net/rlx1xpv.css">
     <style>%STYLE%</style>
 </head>
 <body>
@@ -49,12 +49,18 @@ Document Title
             the last 11.
         </p>
         <p>
-            The button below the text input will insert data which exemplifies the format. 
+            The buttons below fill the text field with pre-made collections. 
         </p>
     </details>
-    <textarea name="data" id="data" cols="100" rows="32"></textarea><br>
-    <button id="submit">Create Document</button>
-    <button id="example">Insert Example Data</button>
+    <div>
+        <textarea name="data" id="data" cols="100" rows="32"></textarea><br>
+        <button id="submit">Create Document</button>
+    </div>
+    <div>
+        <button id="deli">Deli, All</button>
+        <button id="storeSupplies">Store Supplies</button>
+    </div>
+
     <script>%SCRIPT%</script>
 </body>
 </html>
