@@ -148,6 +148,7 @@ Document Title
     </div>
     <div>
         <button id="deli">Deli, All</button>
+        <button id="deliSupplies">Deli Supplies</button>
         <button id="storeSupplies">Store Supplies</button>
     </div>
 
@@ -165,7 +166,11 @@ window.onload = () => {
 
     document.getElementById("storeSupplies").addEventListener("click", (ev) => {
         document.getElementById("data").value = storeSupplies_data;
-    })
+    });
+
+    document.getElementById("deliSupplies").addEventListener("click", (ev) => {
+        document.getElementById("data").value = deli_supplies_data;
+    });
 
     document.getElementById("submit").addEventListener("click", (ev) => {
         // console.log(document.getElementById("data").value);
@@ -215,6 +220,9 @@ window.onload = () => {
                     else if (upc.length === 11) {
                         p_barcode.innerText = upc + "?"
                     }
+                    else if (upc.length === 10) {
+                        p_barcode.innerText = "0" + upc + "?"
+                    }
                     p_barcode.classList.add("barcode");
                     div_item.appendChild(p_barcode);
 
@@ -241,14 +249,9 @@ window.onload = () => {
 
 const deli_data = `Deli Department Catalogs
 
-# UNKNOWN
-03022311414, Pesto Chicken Salad
-23222200000, Spicy Italian Pasta Salad
-
 # Catalog 59 (Frozen)
 
 ## Frozen Chicken
-07701314569, Pilgrim Chicken Tender Jumbo
 07701314569, Pilgrim Bread Chicken Tender RTE
 07701314570, Pilgrims Breaded Wings Boneless
 07701314571, Pilgrim Breaded Bone In Wings RTE
@@ -275,10 +278,11 @@ const deli_data = `Deli Department Catalogs
 01111092033, Banana Pudding
 07111700188, Reser's Macaroni Salad
 03022309223, Summer Slaw
+07210604985, Spicy Italian Pasta Salad
 
 ## Other Salads
 01345438398, ANTIPASTA PASTA SALAD
-07111711439, RESERS SEAFOOD SALAD KIT
+07111711439, RESERS SEAFOOD SALAD KIT (cat 58)
 01111074048, KRO CRNBY CELEBRT SALAD
 07111700280, RESERS PISTACHIO DELIGHT
 07111710932, PINA COLADA DELIGHT
@@ -286,7 +290,6 @@ const deli_data = `Deli Department Catalogs
 
 ## Production
 75410200022, CLASSIC DEVILED EGG KIT
-07750901250, OZRK BEAN DIP KIT
 08919370132, OJCK FDSRV LAHVASH
 07015329916, RNDL RNCH WHP CRM CHS
 01111062765, HMCF RSTD PLLD CKN
@@ -317,24 +320,24 @@ const deli_data = `Deli Department Catalogs
 01111060724, PRSL SWISS CHEESE LOAF
 
 ## GNG
-01111022290, KRO YELLOW AMER CHS GNG
-01111022291, KRO WHT AMER CHS GNG
-01111022284, PRSL COLBY JCK GNG
-01111022285, PRSL COLBY CHS GNG
-01111010796, PRSL PEPPERJACK GNG CHS
 01111022287, PRSL PROVOLONE CHS GNG
-01111009763, PRSL SHARP CHEDDAR GNG
+01111022291, KRO WHT AMER CHS GNG
 01111022289, PRSL BBY SWISS SLCD GNG
+01111022284, PRSL COLBY JCK GNG
+01111022290, KRO YELLOW AMER CHS GNG
 01111022288, PRSL SWISS CHS SLCD GNG
+01111022285, PRSL COLBY CHS GNG
+01111009763, PRSL SHARP CHEDDAR GNG
+01111095557, PRSL MESQUITE TRKY
+01111095559, PRSL WLDFLOWR HNY TURKEY
+01111010796, PRSL PEPPERJACK GNG CHS
+01111060885, PRSL BRWN SUGAR HAM
+01111007173, PRSL HARD SALAMI SLCD
 01111061627, PS SLICED PEPPERED TURKEY
 01111007174, PRSL GENOA SALAMI SLD
-01111007173, PRSL HARD SALAMI SLCD
 01111007172, PRSL PEPPERONI SLICED
 01111095558, PRSL WLDFLWR HNY HAM
-01111095559, PRSL WLDFLOWR HNY TURKEY
-01111095557, PRSL MESQUITE TRKY
 01111060884, PRSL OVN RSTD TURKEY BRST
-01111060885, PRSL BRWN SUGAR HAM
 
 ## Bulk Beef
 01111007111, PRSL Choice Pastrami
@@ -343,7 +346,7 @@ const deli_data = `Deli Department Catalogs
 01111099503, PRSL Choice Roast Beef Well
 
 ## Bulk Ham
-01111058876, PS Tavern Ham
+01111056876, PS Tavern Ham
 01111099024, PRSL Black Forest Ham 2x 8#
 01111099415, PRSL Brown Sugar Ham 4x 3-5.5# 
 01111018103, PS Honey Ham Half 4x 5.35#
@@ -377,7 +380,6 @@ const deli_data = `Deli Department Catalogs
 # Catalog 58 (Meat)
 
 ## Chicken
-07029216392, S M DELI CHKN BRD II
 04172302345, PGPR CUT UP CKN
 07701306247, Lemon Pepper
 07563245811, PGPR CKN TENDER JUMBO
@@ -389,6 +391,7 @@ const deli_data = `Deli Department Catalogs
 # Catalog 09 ("Fresh" Kitchen)
 
 ## Bulk Salads
+03022311414, Pesto Chicken Salad
 03022311604, Buffalo Chicken Salad
 03022311090, Chicken Salad
 03022311091, Queen City Chkn Sld w/ Grp & Pcn
@@ -683,6 +686,262 @@ const storeSupplies_data = `Payton Store Supplies
 40108050748,UTENSIL STORAGE CONT, $17.80 
 40108050837,FLY TRAP GLUE BOARD, $49.90 
 72992800137,1/7BBL PICKUP SACK, $42.72 
-07959418404,4LB BROWN PAPER BAG, $9.14`</script>
+07959418404,4LB BROWN PAPER BAG, $9.14`
+const deli_supplies_data = `Deli Supplies
+# Deli Supplies
+## Aprons & Cutters Yellow & White 
+87874000348, Yellow Paper Aprons
+40108001552, Yellow Cutters
+7344100564, White Disposal Safety Cutters
+## Bags
+60630100435, Ciabatta Sandwich Bags (7x7x3 In Lip Food Bag)
+84299903376, "Kroger 10x8 Slider Bag ""Fresh for Everyone"""
+84299903375, "PS 10x8 Slider Bag ""Elevate Everything"""
+84264404648, Deli Kiosk Carry Out Bag  (Clear Loop Bag)
+40106000636, Hot Meal To Go Tote Bag
+84299903244, 13x10 Antimicrobial Bag
+84299903243, 15x13 Antimicrobial Bag
+1084264408024, Home Chef Deli Tote Bag 8x6x16 Clear Flat Bottom
+## Beverage Cups and Straws
+4116527756, 22oz Solo Flat Lid
+4159450023, 32oz Dart Lid 
+31115462, Straws 10.25 inc Clear Wrapped     Not Available
+## Bowls and Soup Cups
+69659900081, 8 oz Round Bowl w/Lid (Hot Side Micro)
+1619405898, 80 oz Round Bowl w/Lid
+7602636914, 48 oz Square Cup w/Lid
+5079429793067, 12oz HC Soup Cup w/Lid
+5079429793068, 16oz HC Soup Cup w/Lid
+5079429793069, 32 oz HC Soup Cup w/Lid
+, "Chicken Bag
+84299903381, Rtsri Bag Garlic&Herb Chicken
+84299903380, Popcorn Chicken Bag 9x4.5
+84299903382, Rtsri Bag Savory Chicken Bag 32oz
+84299903390, Lemon Pepper Bag 12.75x8.25    Seasonal LTO
+84299903337, Mesquite BBQ Bag      Seasonal LTO
+1619406660, ST Rstd Chicken Dome (Med Rotiss Chicken Cont)
+71446248167, ST Rstd Chicken Sleeve
+1619409926, Chicken Barn 4pc No Hand Combo (Chicken Tenders)
+71446248165, 5pc Chicken Tender Sleeve
+85750300625, Chicken Box 24 PCS
+85750300650, Chicken Box 48 PCS
+70728233314, Chicken Box 98 Pcs (10 lb Box)
+1619407173, Colossal Roasted Chicken Container 
+7218172745, 8pc Fried Chicken Box Liner (9x12 Powerprep Wrap)
+71446248182, 8pc Fried Chicken Box Hm Chf
+1619407962, 8 pc Chicken Hinged Container  (MD Salad Clamshell 9x9)
+1619414768, Chicken Barn 8pc Hot and 20ct Wings
+71446248182, Home Chef 8 pc Fried Chicken Box
+7218172745, 9X12 POWER PREP WRAP (Box Liner)
+71446248177, 8pc Fried Chicken Sleeve
+71446248163, 8 pc Baked Chicken Sleeve
+71446248178, 8 pc Spicy Chicken Sleeve
+79429783998, Chicken Wing Bucket w/Lid 54oz
+1619412379, 8oz TE Rectangular Container
+1619412380, 12oz Rectangular TE (TS12)
+1619412362, 16oz Regular TE  (TS16)  (Popcorn & Pulled Chkn)
+1619411785, 24oz TE Hinged Lid Deli (TS24)
+1619411786, 32oz TE Hinged Lid Deli (TS32)
+1619413239, 35oz Rectangular TE (TS35)  (5pc Cold Tenders)
+1619413236, 35oz Rectangular TE w/Dm Lid (5pc Cold  Tndr)
+1619413229, 64oz Rectangular TE w/Dome Lid (8 Pc Cold Spicy Chkn)
+## Containers and Others
+3767225, "Deviled Egg Container with Dome
+3795333, "Deviled Egg Container with Dome
+40108051103, Deviled Egg Tray 24ct
+4920202213, 4oz Hot Side Dish Container
+4920202219, Lid For 4oz/16oz Side Container
+4920202367, 16oz Side Dish Container (for sides with handle)
+1619406351, Black Medium Microwavable Tray - 24oz.
+1619405691, Clear Lid for Black Tray – 16/24oz.  
+84264402901, Deli Take Out Carton #1
+84264402892, Deli Take Out Carton #3
+84264402898, Deli Take Out Carton #8
+4159421296, Large White Styrofoam 3 comp container (steamtable)
+74938497533, Macaroni & Chs (Alum Tray w/Flat Lid)
+74938498904, Macaroni & ChS (Blk/Gold Cont w/Dome Lid)
+3709334, "Microwave Side Container
+3715497, "Oval Side Container Black
+3708013, "Sandwich w/fold
+3723855, "Sandwich Wedge Containers
+## Ribs & Turkey Breast
+7144648172, HC St. Louis Rib Sleeve
+84299903383, Turkey Breast Bag 13.5x7.5
+1619407051, Full Slab Container HOT  (Lrg Plastic Cont w/Dome)
+1619407050, Half Slab Container HOT (Med Rib Cont w/Dome) 
+79429783998, 9 CT Rib Bucket  (Wing Bucket w/Lid 54oz)
+## Cups and Lid
+1619400712, 16 oz. Deli Cup
+1619405426, 24 oz. Deli Cup
+1619401196, 32 oz. Deli Cup
+1619406194, Deli Liver Lids
+## Fryer Filter
+69206042465, Pitco Fryer Filter Pads 60ct
+## Gloves and Beard Cover
+75824711212, Beard Cover
+76293505840, Yellow vinyl powdered gloves - Medium
+76293505841, Yellow vinyl powdered gloves -Large
+76293505842, Yellow vinyl powdered gloves -Extra Large
+76293502200, Inte-Fit White vinyl powdered gloves -Small
+76293502201, Inte-Fit White vnyl powdered gloves -Medium
+76293502202, Inte-Fit White vinyl powdered gloves- Large
+76293502203, White vinyl powdered gloves - Extra Large
+76293502594, White disposable gloves - Extra Small
+76293500010, White disposable gloves - Small
+76293500011, White disposable gloves - Medium
+76293500013, White disposable gloves - Large
+76293500012, White disposable gloves - Extra Large
+, "Miscellaneous - Clings
+81001013014, Allergen Static Cling
+7873194331, Right wrap (Deli wax paper)
+2790100625, Alum Foil 18 Inch Heavy Duty   
+79249302583, Food Grade Mineral Oil
+86506500043, All Purpose Towels
+79249301935, Elementary Floor Cleaner
+## Pans and Spoons
+1619405086, Half Steam Table Foil Pan
+40108000204, Spoon Perforated 11inch Black
+40108007223, Spoon Solid 11inch Black
+## Party Tray Items
+3998202038, 10” Square Black Party Platter w/ Lid (Small-Wknders)
+3998202040, 14” Square Black Party Platter w/ Lid (Medium)
+3998202041, 16” Square Black Party Platter w/ Lid (Large)
+, Party Platter Price List
+40106000927, Party Planner Brochure
+40108050910, Party Tray Order Form
+60630100429, Party Tray Bag 18x7x24
+3998200731, Small Black Tong (Party Tray 6.5 in BLK Tong)
+## Pizza Boxes
+60216612076, Pizza Whole Box 14x14x1.75
+70728231704, "Pizza 14"" Circle Pad"
+60216651259, Pizza Slice Box
+## Pizza Take & Bake Program
+815176011248, 15 Inch Kraft Pizza Tray
+815176011552, 15 Inch Clear Pet Dome Lid
+## Popcorn Containers  (353 and 915)
+842613013448, 64 oz Popcorn Lid (7in Round Flat Lid)
+842613001346, "64oz Popcorn Container (7"" 64oz Round Tub)"
+2004060700179, 144oz Popcorn Tub
+2004060700181, "144oz 10"" Lid for 144oz Tub"
+## Salad Bar Containers and Food Service Pack
+2450203068, 5x5 Clear Clamshell
+2450203067, 6x6 Clear Clamshell
+1619407962, 9x9 Medium Salad Clamshell
+1619405102, Large Salad Clamshell
+1619404834, 3 Compartment Container Hinged Lid Salad
+4159439387, 2.5 oz Portion Cup
+4159436566, Lid for 2.5oz Portion Cup
+72735101350, HW White Prepack MultiPack Plasticware
+## Sheets
+0040108055318, 8X10 Deli Satin Sheets
+40108000127, 14x20 Polypropylene Sheets
+40108000126, 20x22 Polypropylene Sheets
+# DELI LABELS/STICKERS/CARDS
+## GRAB N GO STICKERS
+85012800631, AMERICAN CHS GRAB N GO LABEL
+85012800643, TURKEY GRAB N GO LABEL
+85012800636, HAM GRAB N GO LABEL
+85012800644, SWISS GRAB N GO LABEL
+81001013155, SALAMI GRAB N GO LABEL
+85012800642, ROAST BEEF GRAB N GO LABL
+86192500005, COLBY GRAB N GO LABEL
+85012800634, COLBY JACK GRAB N GO LABL
+85012800639, CHEDDAR GRAB N GO LABEL
+85012800632, BOLOGNA GRAB N GO LABEL
+85012800637, MUENSTER GRAB N GO LABEL
+85012800641, PROVOLONE GRAB N GO LABEL
+81001013326, ROASTED CHICKEN GRAB N GO LABEL
+85012800640, PEPPERONI GRAB N GO LABEL
+85012800638, PASTRAMI GRAB N GO LABEL
+85012800635, CORNED BEEF GRAB N GO LBL
+81001013123, G N G SNDWCH INGRDNT LBL
+, ITALIAN DELI DEAL STICKER
+, AMERICAN DELI DEAL STICKER
+call Deli, SMOKEHOUSE C0MBO STICKER
+, BEEF AND CHEDDAR COMOB STKR
+Relay, HAM AND SWISS COMBO STCKR
+## POULTRY and RIB STICKERS
+81001013333, HMCF 8pc Fried Chicken Label
+81001013329, HMCF 8pc Baked Label
+81001013505, HMCF Swt Hickory Label
+81001013496, HMCF Buffalo Wings Red Hot Sc Sticker
+81001013497, HMCF BBQ Wing Cattleman Sticker
+81001013324, HMCF Mild Buffalo Label
+81001013327, HMCF Sizzlin Hot Label
+81001013326, HMCF Roasted Chicken Label
+81001013330, HMCF Boneless Label
+81001013323, HMCF Breaded Label
+81001013325, HMCF Popcorn Chicken Label
+81001013372, HMCF Pulled Turkey Label
+81001013334, HMCF Pulled Chicken 
+81001013368, HCMF Savory Pulled Chicken
+81001013371, HMCF Garlic & Herb Pulled Chicken
+81001013483, HMCF Pulled Pork
+81001013410, HMCF Stl Louis Rib Label
+## Macaroni & Cheese Labels
+81001013438, HMCF HE Cheddar Mac n Chs
+81001013436, HMCF Buffalo Ranch Mac n Chs
+81001013350, 2/$9.99 Must Buy 2 with Card or $5.99
+81001013351, $9.99 Dayglo
+## Home Chef Dinner and Fish Stickers
+81001013320, Home Chef Heat & Eat Sticker
+81001013417, Home Chef Dinner 30% Off 
+81001013415, Home Chef Logo Sticker (Fish)
+## CARDS
+87869700513, Allergen Case Cards
+## Cling
+81001013014, Allergen Static Cling
+## Day Dot Labels
+74787300386, Monday
+74787300388, Tuesday
+74787300390, Wednesday
+74787300392, Thursday
+74787300394, Friday
+74787300396, Saturday
+74787300398, Sunday
+## Monarch Gun and Labels
+40108050713, Monach Label Gun
+40108050704, Monarch Deli Labels
+## Scale Labels
+81001013272, Hobart Continuous Strip
+0081001013501, Hobart 6.5in Bakery Fresh Scale Label
+0081001013384, Hobert 6.5 in Blank w/Deadn Yellow Bib
+0048562000001, Hobart Promo Label
+## Day Glo Stickers
+85012800667, 10/$10 w/card
+81001013183, 99 cent w/card Round
+85012800653, $1.99 
+85012800662, $2.88 w/card
+85012800663, $2.99 oblong
+85012800657, 2/$3.00 w/card
+85012800658, 2/$4.00 w/card
+85012800659, 2/$5.00 w/card
+85012800665, 2/$6.00 w/card
+85012800666, 2/$7.00 w/card
+85012800652, 3/$5.00 w/card
+85012800655, 4/$5.00 w/card
+85012800668, $2.99 w/card Round
+, $3.49 w.card
+85012800647, $3.99 w/card
+81001013181, $4.99 w/card
+81001013356, $5.00 
+81001013363, $5.00 w/card
+85012800649, $5.99 w/card
+81001013182, $6.99 w/card
+85012800651, $7.99 w/card
+85012800645, $8.99 w/card
+85012800646, $9.99 w/card
+85012800656, Blank w/card
+85012800661, Buy One Get One Free
+86192500007, Buy One Get One Free w/card
+## Other Labels
+85012800692, Clock Face Label
+74787300909, Use First label
+85012800660, Great on the Grill Sticker
+81001013225, IDT Sticker
+81001013002, EBT Sticker
+81001013357, Murray's Red Sale Label
+71001013448, Murray's Hand Crafted Here Label
+`</script>
 </body>
 </html>

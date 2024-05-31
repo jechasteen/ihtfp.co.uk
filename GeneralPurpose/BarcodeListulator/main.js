@@ -12,7 +12,11 @@ window.onload = () => {
 
     document.getElementById("storeSupplies").addEventListener("click", (ev) => {
         document.getElementById("data").value = storeSupplies_data;
-    })
+    });
+
+    document.getElementById("deliSupplies").addEventListener("click", (ev) => {
+        document.getElementById("data").value = deli_supplies_data;
+    });
 
     document.getElementById("submit").addEventListener("click", (ev) => {
         // console.log(document.getElementById("data").value);
@@ -62,6 +66,9 @@ window.onload = () => {
                     else if (upc.length === 11) {
                         p_barcode.innerText = upc + "?"
                     }
+                    else if (upc.length === 10) {
+                        p_barcode.innerText = "0" + upc + "?"
+                    }
                     p_barcode.classList.add("barcode");
                     div_item.appendChild(p_barcode);
 
@@ -88,3 +95,4 @@ window.onload = () => {
 
 const deli_data = `%DELI%`
 const storeSupplies_data = `%STORESUPPLIES%`
+const deli_supplies_data = `%DELISUPPLIES%`

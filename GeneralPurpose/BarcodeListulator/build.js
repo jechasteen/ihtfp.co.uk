@@ -10,6 +10,7 @@ $(() => {
         STYLE: read(join(__dirname, "style.css"), read_opt),
         SCRIPT: read(join(__dirname, "main.js"), read_opt),
         DELI: read(join(__dirname, "deli.txt"), read_opt),
+        DELISUPPLIES: read(join(__dirname, "DeliSupplies.txt"), read_opt),
         STORESUPPLIES: read(join(__dirname, "store_supplies.txt"), read_opt),
     });
 
