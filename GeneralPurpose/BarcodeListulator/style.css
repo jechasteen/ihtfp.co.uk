@@ -40,11 +40,11 @@ img {
 
 /* This gets rid of the header and footer, really */
 @page {
-    margin: 0in;
+    margin: 0.25in;
 }
 
 body {
-    padding: 0.5in 0;
+    padding: 0.5in 0.5in 0.5in 0;
     font-family: "owners-text", sans-serif;
 }
 

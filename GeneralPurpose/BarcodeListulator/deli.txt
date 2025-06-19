@@ -15,29 +15,25 @@ Deli Department Catalogs
 84013430706, HMCF STL RIBS FULL SLAB C
 04771709103, SEASONED SHREDDED PORK CA
 04497900417, LBWN CRCKL CUT POTATO WDG
-28684780000, DELI PULLED PORK BBQ C
-28661980000, DELI PULLED CKN BBQ C
 02802915642, TRSF TRIDENT POLLOCK FISH
-
-## Salad Case
-28661980000, Mont Inn BBQ Chicken
-28684780000, Mont Inn BBQ Pork
+71592306124, Mont Inn BBQ Pork
+71592306125, Mont Inn BBQ Chicken
 
 # Catalog 34 (Shared Perishable)
 
-## Salad Case POG
+## Salads
 01111092033, Banana Pudding
 07111700188, Reser's Macaroni Salad
 03022309223, Summer Slaw
 07210604985, Spicy Italian Pasta Salad
-
-## Other Salads
 01345438398, ANTIPASTA PASTA SALAD
 07111711439, RESERS SEAFOOD SALAD KIT (cat 58)
 01111074048, KRO CRNBY CELEBRT SALAD
 07111700280, RESERS PISTACHIO DELIGHT
 07111710932, PINA COLADA DELIGHT
 01111092020, KRO STRAWBRY CHEESECAKE
+01111095208, Ham Salad
+07210604675, Italian Pasta Salad
 
 ## Production
 75410200022, CLASSIC DEVILED EGG KIT
@@ -70,6 +66,39 @@ Deli Department Catalogs
 01111009726, PRSL SHARP CHEDDAR
 01111060724, PRSL SWISS CHEESE LOAF
 
+## Bulk Beef
+01111007111, PRSL Choice Pastrami
+01111007112, PRSL Choice Corn Beef
+01111099503, PRSL Choice Roast Beef Well
+01111060263, PRSL Angus Roast Beef Medium
+
+## Bulk Ham
+01111058676, PS Tavern Ham
+01111099415, PRSL Brown Sugar Ham 4x 3-5.5# 
+01111099024, PRSL Black Forest Ham 2x 8#
+01111011500, Maple Ham
+01111018103, PS Honey Ham Half 4x 5.35#
+
+## Bulk Poultry
+01111099496, PS Oven Turkey 2x 9#
+01111061242, PS Blackened Turkey
+01111099497, PS Honey Turkey 2x 9.65#
+01111099498, PS Mesquite Turkey 2x 8.5#
+01111060734, PS Pepper Turkey
+01111022351, PS Hot Honey Chicken
+01111058667, PS Gold Chicken LS
+
+## Loaves
+04450006131, Kahn's Deluxe Club Bologna
+04450006145, Kahn's Garlic Bologna
+04450006104, Kahn's Beef Bologna
+01111052230, PS Beef Bologna
+01111019000, PS Pickle Pepper Loaf
+01111060273, PS Genoa Salami 
+01111060274, PS Hard Salami
+01111099838, PS Pepperoni
+01111061976, PS Soppressata
+
 ## GNG
 01111022287, PRSL PROVOLONE CHS GNG
 01111022291, KRO WHT AMER CHS GNG
@@ -90,38 +119,6 @@ Deli Department Catalogs
 01111095558, PRSL WLDFLWR HNY HAM
 01111060884, PRSL OVN RSTD TURKEY BRST
 
-## Bulk Beef
-01111007111, PRSL Choice Pastrami
-01111007112, PRSL Choice Corn Beef
-01111060263, PRSL Angus Roast Beef Medium
-01111099503, PRSL Choice Roast Beef Well
-
-## Bulk Ham
-01111056876, PS Tavern Ham
-01111099024, PRSL Black Forest Ham 2x 8#
-01111099415, PRSL Brown Sugar Ham 4x 3-5.5# 
-01111018103, PS Honey Ham Half 4x 5.35#
-
-## Bulk Turkey
-01111099496, PS Oven Turkey 2x 9#
-01111061242, PS Blackened Turkey
-01111099497, PS Honey Turkey 2x 9.65#
-01111099498, PS Mesquite Turkey 2x 8.5#
-01111060734, PS Pepper Turkey
-
-## Bulk Chicken
-01111022351, PS Hot Honey Chicken
-01111058667, PS Gold Chicken LS
-
-## Loaves
-04450006131, Kahn's Deluxe Club Bologna
-01111052230, PS Beef Bologna
-01111019000, PS Pickle Pepper Loaf
-01111060273, PS Genoa Salami 
-01111060274, PS Hard Salami
-01111099838, PS Pepperoni
-01111061976, PS Soppressata
-
 ## Hot Sides
 01111037260, Mac & Cheese
 01111038666, Mashed Potatoes
@@ -141,14 +138,17 @@ Deli Department Catalogs
 
 # Catalog 09 ("Fresh" Kitchen)
 
-## Bulk Salads
+## Salad Kits
 03022311414, Pesto Chicken Salad
 03022311604, Buffalo Chicken Salad
 03022311090, Chicken Salad
 03022311091, Queen City Chkn Sld w/ Grp & Pcn
 03022311444, Loaded Potato Salad
+03022310342, California Broccoli
 
 # Catalog 69 (Payton)
+
+## Mixes, Sauces, & Condiment Packets
 76308996794, CHICKEN BREADING
 40519206794, SAVRY CHCKN SEASONING
 04150001270, CATTLEMENS MEMPHIS BBQ
@@ -158,9 +158,17 @@ Deli Department Catalogs
 01300053160, HEINZ TARTAR SAUCE
 01300098320, HEINZ KETCHUP PKTS 200C
 07550000003, CONDIMENTS-TX PETE PACKS
+04800135165, Mayo Packets
+
+## Sauce Cups
+01340951667, Buffalo
+01340951684, Sweet Red Chili
+04133537059, Boom Boom
+01340932875, BBQ
+04133532874, Honey Mustard
+04133532875, Buttermilk Ranch
+04133532984, Blue Cheese
 
 # Catalog 37 (Supplies)
-
-## Not on order guide
 01619404821, Full Size Steam Table Pan
 01619405086, Half Steam Table Pan
